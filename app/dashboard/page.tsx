@@ -16,14 +16,18 @@ import { SurveyStats } from "@/components/surveys/survey-stats";
 export default function DashboardPage() {
   const [surveys, setSurveys] = useState<Survey[]>([]);
   /************** Add a useState hook for storing and setting the "analytics" data(i.e It's an array of "analytics") (By Claire) **************/
+  const [analytics, setAnalytics] = useState<SurveyAnalytics[]>([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const { toast } = useToast();
 
+  console.log(analytics);
+
   useEffect(() => {
     if (user) {
       fetchSurveys();
-      /************** Call the function to analytics (By Claire) **************/
+      /************** Call the function for fetching the analytis analytics (By Claire) **************/
+      fetchAnalytics()
     }
   }, [user]);
 
@@ -51,9 +55,21 @@ export default function DashboardPage() {
   /************** Create an async "fetchAnalytics" arrow function for getting survey analytics (By Claire) **************/
   /*
   - Use the try and catch method and supabase endpoint for getting the survey analytics (Table name: "surveys").
-  - If Cheeck if there is an error and throw the error
-  - If no error, set the setAnalytics to the data if it exist or to an empty array if not and console.error the error in the catch method
+  - If Check if there is an error and throw the error
+  - If no error, set the setAnalytics function to the data if it exist or to an empty array if not and console.error the error in the catch method
   */
+
+  const fetchAnalytics = async () => {
+    const { data, error } = supabase.from("surveys").select("*");
+    try {
+
+    if(error) throw error
+    setAnalytics(data || []);
+
+    } catch (err) {
+      console.error(err)
+    }
+  };
 
   /************** Create an async "deleteSurvey" arrow function to delete a survey (By Serge) **************/
   /*Task:
@@ -147,7 +163,7 @@ export default function DashboardPage() {
               ) : (
                 <SurveyTable
                   surveys={surveys}
-                  analytics={[]}
+                  analytics={analytics}
                   /************** Pass in the "deleteSurvey" function without calling it (By Serge) **************/
                   onDelete={() => {}}
                   /************** Pass in the "copyShareLink" function without calling it (By Serge) **************/

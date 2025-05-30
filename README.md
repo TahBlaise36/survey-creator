@@ -343,9 +343,9 @@ Write your code as per the Jira task description.
 
 For SC-3, this would involve re-enabling fetchAnalytics in app/dashboard/page.tsx and ensuring SurveyStats receives and displays the data.
 
-Write Tests: Add or re-enable unit/integration tests (_.test.ts or _.test.tsx files) for the functionality you are implementing.
+<!-- Write Tests: Add or re-enable unit/integration tests (_.test.ts or _.test.tsx files) for the functionality you are implementing.
 
-Code Style: Run "npm run lint" and npm run format regularly to ensure your code adheres to project standards.
+Code Style: Run "npm run lint" and npm run format regularly to ensure your code adheres to project standards. -->
 
 Step 6.4: Commit Your Changes:
 
@@ -353,7 +353,8 @@ Commit frequently with clear, concise messages.
 
 CRITICAL: Include the Jira issue key (SC-X) in your commit message.
 
-git add . git commit -m "SC-3: Re-enable analytics fetching and display on dashboard"
+git add . 
+git commit -m "SC-3: Re-enable analytics fetching and display on dashboard"
 
 ### Example for another commit:
 

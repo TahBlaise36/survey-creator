@@ -150,7 +150,7 @@ export default function DashboardPage() {
                   analytics={[]}
                   /************** Pass in the "deleteSurvey" function without calling it (By Serge) **************/
                   onDelete={() => {}}
-                  /************** Pass in the "copyShareLink" function without calling it (By Serge) **************/
+                  /************** Pass in the "copyShareLink" function without calling it (By Hermine) **************/
                   onCopyLink={() => {}}
                 />
               )}

@@ -45,6 +45,10 @@ export function SurveyActionsMenu({
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   /************** Function to handle the delete action (By Serge) **************/
+  const handleDelete = () => {
+    onDelete(survey.id);
+    setShowDeleteDialog(false);
+  };
 
   return (
     <>
@@ -115,7 +119,7 @@ export function SurveyActionsMenu({
             /************** Call the "setShowDeleteDialog" with the value
               "true" in the onClick method using a callback
               function (By Serge) **************/
-            onClick={() => {}}
+            onClick={() => setShowDeleteDialog(true)}
             className="text-red-600 focus:text-red-600"
           >
             <Trash2 className="h-4 w-4 mr-2" />
@@ -137,7 +141,7 @@ export function SurveyActionsMenu({
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               /************** Call the handleDelete in the onClick method (By Serge) **************/
-              onClick={() => {}}
+              onClick={handleDelete}
               className="bg-red-600 hover:bg-red-700"
             >
               Delete

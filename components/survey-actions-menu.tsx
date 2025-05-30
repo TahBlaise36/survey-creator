@@ -68,9 +68,9 @@ export function SurveyActionsMenu({
                   View Survey
                 </Link>
               </DropdownMenuItem>
-              /************** Call the "onCopyLink" with the value
+              {/************** Call the "onCopyLink" with the value
               "survey.share_token!" in the onClick method using a callback
-              function (By Hermine) **************/
+              function (By Hermine) **************/}
               <DropdownMenuItem onClick={() => {}}>
                 <Copy className="h-4 w-4 mr-2" />
                 Copy Link

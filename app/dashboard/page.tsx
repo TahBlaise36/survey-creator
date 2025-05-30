@@ -23,7 +23,7 @@ export default function DashboardPage() {
   useEffect(() => {
     if (user) {
       fetchSurveys();
-      /************** Call the function to analytics (By Claire) **************/
+      /************** Call the "fetchAnalytics" function (By Claire) **************/
     }
   }, [user]);
 
@@ -61,6 +61,32 @@ export default function DashboardPage() {
   - Use the toast to display success message with title: "Success" and description: "Survey deleted successfully".
   - If an error accurs, use the toast to display success message with title: "Error", description: "Failed to delete survey" and variant: "destructive".
   */
+
+  const deleteSurvey = async (surveyId: string) => {
+    try {
+      const { error } = await supabase
+        .from("surveys")
+        .delete()
+        .eq("id", surveyId);
+
+      if (error) throw error;
+
+      // Remove the deleted survey from the state
+      setSurveys((prev) => prev.filter((survey) => survey.id !== surveyId));
+
+      toast({
+        title: "Success",
+        description: "Survey deleted successfully",
+      });
+    } catch (error) {
+      console.error("Error deleting survey:", error);
+      toast({
+        title: "Error",
+        description: "Failed to delete survey",
+        variant: "destructive",
+      });
+    }
+  };
 
   /************** Create a "copyShareLink" arrow function to copy and share link to clipboard (By Hermine) **************/
   /*
@@ -146,11 +172,12 @@ export default function DashboardPage() {
                 </Card>
               ) : (
                 <SurveyTable
+                  /************** Pass in the "surveys" variable (By Claire) **************/
                   surveys={surveys}
                   analytics={[]}
                   /************** Pass in the "deleteSurvey" function without calling it (By Serge) **************/
-                  onDelete={() => {}}
-                  /************** Pass in the "copyShareLink" function without calling it (By Serge) **************/
+                  onDelete={deleteSurvey}
+                  /************** Pass in the "copyShareLink" function without calling it (By Hermine) **************/
                   onCopyLink={() => {}}
                 />
               )}
